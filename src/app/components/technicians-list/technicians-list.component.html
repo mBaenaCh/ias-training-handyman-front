@@ -1,1 +1,7 @@
-<p>technicians-list works!</p>
+<h3>List of technicians:</h3>
+<div class="technicians">
+    <div class="technician" *ngFor="let technician of technicians" (click)="onClick(technician)">
+        <h4>{{technician.name}}</h4>
+        <p>{{technician.lastName}}</p>
+    </div>
+</div>
