@@ -9,6 +9,7 @@ import { HoursCalculatorComponent } from './components/hours-calculator/hours-ca
 import { TechniciansListComponent } from './components/technicians-list/technicians-list.component';
 import { RegisterServiceComponent } from './components/register-service/register-service.component';
 import { TechnicianServicesComponent } from './components/technician-services/technician-services.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { TechnicianServicesComponent } from './components/technician-services/te
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
