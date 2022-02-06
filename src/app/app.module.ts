@@ -10,6 +10,7 @@ import { TechniciansListComponent } from './components/technicians-list/technici
 import { RegisterServiceComponent } from './components/register-service/register-service.component';
 import { TechnicianServicesComponent } from './components/technician-services/technician-services.component';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
