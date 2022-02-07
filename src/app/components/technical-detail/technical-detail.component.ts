@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-technical-detail',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TechnicalDetailComponent implements OnInit {
 
-  constructor() { }
+  @Output() technicianId: EventEmitter<string>;
+
+  constructor(private activatedRoute: ActivatedRoute) {
+    this.technicianId = new EventEmitter();
+  }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe(params => {
+      this.technicianId.emit(params.id);
+    })
+    
   }
+
+  
+
+
 
 }

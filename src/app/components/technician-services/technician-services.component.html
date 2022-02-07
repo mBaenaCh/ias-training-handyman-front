@@ -1,1 +1,7 @@
-<p>technician-services works!</p>
+<div class="services">
+    <div class="service" *ngFor="let service of services">
+        <p>{{service.serviceId}}</p>
+        <p>{{service.initDateTime}}</p>
+        <p>{{service.endDateTime}}</p>
+    </div>
+</div>

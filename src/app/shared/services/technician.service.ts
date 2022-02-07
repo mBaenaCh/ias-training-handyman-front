@@ -17,7 +17,7 @@ export class TechnicianService {
     return this.http.get<TechnicianModel[]>(this.baseUrl);
   }
 
-  getById(id: string): Observable<TechnicianModel> {
-    return this.http.get<TechnicianModel>(`${this.baseUrl}/${id}`);
+  getById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/${id}`);
   }
 }
