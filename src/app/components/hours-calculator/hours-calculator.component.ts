@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { WorkedHoursModel } from 'src/app/shared/models/workedHours';
+import { ReportService } from 'src/app/shared/services/report.service';
 
 @Component({
   selector: 'app-hours-calculator',
@@ -7,9 +10,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HoursCalculatorComponent implements OnInit {
 
-  constructor() { }
+  hoursCalculatorForm: FormGroup;
+  requestParams: any;
+  calculatedHours: WorkedHoursModel;
+  showCalculatedHours: boolean;
+
+  constructor(private reportService: ReportService) {
+    this.requestParams = {};
+    this.showCalculatedHours = false;
+    this.hoursCalculatorForm = new FormGroup({
+      technicianId: new FormControl('', [
+        Validators.required
+      ]),
+      week: new FormControl('', [
+        Validators.required
+      ]),
+    });
+  }
 
   ngOnInit(): void {
+  }
+
+  onSubmit(): void {
+    this.showCalculatedHours = true;
+    this.requestParams = this.hoursCalculatorForm.value;
+    console.log(this.requestParams.week);
+    this.reportService.getWorkedHours(this.hoursCalculatorForm.get("technicianId").value, this.hoursCalculatorForm.get("week").value).subscribe((data)=>{
+      this.calculatedHours = data;
+      console.log(this.calculatedHours);
+    });
+    this.hoursCalculatorForm.reset();
   }
 
 }

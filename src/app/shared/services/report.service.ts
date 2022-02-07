@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ReportModel } from '../models/report';
+import { WorkedHoursModel } from '../models/workedHours';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class ReportService {
     return this.http.post<ReportModel>(this.baseUrl, reportBody);
   }
 
-  getWorkedHours(id: string, week: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/${id}/calculate-hours/${week}`);
+  getWorkedHours(id: string, week: number): Observable<WorkedHoursModel> {
+    return this.http.get<WorkedHoursModel>(`${this.baseUrl}/${id}/calculate-hours/${week}`);
   }
 }

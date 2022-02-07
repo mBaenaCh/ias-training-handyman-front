@@ -1,1 +1,28 @@
-<p>hours-calculator works!</p>
+<h3>Calculate</h3>
+<form [formGroup]="hoursCalculatorForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label>Id of the Technician</label>
+        <input type="text" formControlName="technicianId" class="form-control">
+        <div class="error" *ngIf="hoursCalculatorForm.controls.technicianId.errors && hoursCalculatorForm.controls.technicianId.touched">
+            <p>This field is required</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Week of the year</label>
+        <input type="number" formControlName="week" class="form-control">
+        <div class="error" *ngIf="hoursCalculatorForm.controls.week.errors && hoursCalculatorForm.controls.week.touched">
+            <p>This field is required</p>
+        </div>
+    </div>
+    <input type="submit" value="Calculate" [disabled]="!hoursCalculatorForm.valid" class="btn btn-primary">
+    <input type="reset" value="Clear" class="btn btn-secondary">
+</form>
+<div *ngIf="showCalculatedHours">
+    <h5>Total hours worked: {{calculatedHours?.totalHours}}</h5>
+    <p><b>Normal hours: </b>{{calculatedHours?.normalHours}}</p>
+    <p><b>Night hours: </b>{{calculatedHours?.nightHours}}</p>
+    <p><b>Dominical hours: </b>{{calculatedHours?.dominicalHours}}</p>
+    <p><b>Normal extra hours: </b>{{calculatedHours?.normalExtraHours}}</p>
+    <p><b>Night extra hours: </b>{{calculatedHours?.nightExtraHours}}</p>
+    <p><b>Dominical extra hours: </b>{{calculatedHours?.dominicalExtraHours}}</p>
+</div>
