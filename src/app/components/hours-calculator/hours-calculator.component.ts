@@ -34,10 +34,8 @@ export class HoursCalculatorComponent implements OnInit {
   onSubmit(): void {
     this.showCalculatedHours = true;
     this.requestParams = this.hoursCalculatorForm.value;
-    console.log(this.requestParams.week);
     this.reportService.getWorkedHours(this.hoursCalculatorForm.get("technicianId").value, this.hoursCalculatorForm.get("week").value).subscribe((data)=>{
       this.calculatedHours = data;
-      console.log(this.calculatedHours);
     });
     this.hoursCalculatorForm.reset();
   }

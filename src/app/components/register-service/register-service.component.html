@@ -1,1 +1,21 @@
-<p>register-service works!</p>
+<h3>Hello, {{technician?.name}}. You can register your services below:</h3>
+<form [formGroup]="registerServiceForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label>TechnicianId</label>
+        <input type="text" formControlName="technicianId" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Service id</label>
+        <input type="text" formControlName="serviceId" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Service init date</label>
+        <input type="datetime-local" formControlName="initDateTime" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Service end date</label>
+        <input type="datetime-local" formControlName="endDateTime" class="form-control">
+    </div>
+    <input type="submit" value="Register" class="btn btn-primary">
+    <input type="reset" value="Clear" class="btn btn-secondary">
+</form>
