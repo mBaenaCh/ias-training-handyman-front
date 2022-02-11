@@ -53,8 +53,10 @@ export class RegisterServiceComponent implements OnInit {
   }
 
   onSubmit(): void{
-    this.createdReport = this.registerServiceForm.value;
-    this.reportService.create(this.createdReport).subscribe();
+    //this.createdReport = this.registerServiceForm.value;
+    //this.reportService.create(this.createdReport).subscribe();
+    this.registerServiceForm.get["initDateTime"].value();
+    this.registerServiceForm.get["endDateTime"].value();
   }
 
 }
