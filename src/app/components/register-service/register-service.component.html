@@ -3,18 +3,30 @@
     <div class="form-group">
         <label>TechnicianId</label>
         <input type="text" formControlName="technicianId" class="form-control">
+        <div class="error" *ngIf="registerServiceForm.controls.technicianId.errors && registerServiceForm.controls.technicianId.touched">
+            <p>This field is required</p>
+        </div>
     </div>
     <div class="form-group">
         <label>Service id</label>
         <input type="text" formControlName="serviceId" class="form-control">
+        <div class="error" *ngIf="registerServiceForm.controls.serviceId.errors && registerServiceForm.controls.serviceId.touched">
+            <p>This field is required</p>
+        </div>
     </div>
     <div class="form-group">
         <label>Service init date</label>
         <input type="text" formControlName="initDateTime" class="form-control">
+        <div class="error" *ngIf="registerServiceForm.controls.initDateTime.errors && registerServiceForm.controls.initDateTime.touched">
+            <p>This field is required</p>
+        </div>
     </div>
     <div class="form-group">
         <label>Service end date</label>
         <input type="text" formControlName="endDateTime" class="form-control">
+        <div class="error" *ngIf="registerServiceForm.controls.endDateTime.errors && registerServiceForm.controls.endDateTime.touched">
+            <p>This field is required</p>
+        </div>
     </div>
     <input type="submit" value="Register" class="btn btn-primary">
     <input type="reset" value="Clear" class="btn btn-secondary">

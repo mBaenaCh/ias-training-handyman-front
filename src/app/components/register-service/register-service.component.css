@@ -1,0 +1,25 @@
+input.ng-valid.ng-touched{
+    border: 1px solid green;
+}
+
+input.ng-invalid.ng-touched{
+    border: 1px solid red;
+}
+
+.form-group{
+    margin: 15px
+}
+
+.btn-primary{
+    
+    margin-left: 15px;
+}
+
+.btn-secondary{
+    margin-left: 15px; 
+}
+
+.error{
+    color: red;
+    font-size: 12px;
+}
