@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -26,10 +27,10 @@ export class RegisterServiceComponent implements OnInit {
       serviceId: new FormControl('', [
         Validators.required
       ]),
-      initDateTime: new FormControl('',[
+      initDateTime: new FormControl('', [
         Validators.required
       ]),
-      endDateTime: new FormControl('',[
+      endDateTime: new FormControl('', [
         Validators.required
       ])
     });
@@ -37,26 +38,30 @@ export class RegisterServiceComponent implements OnInit {
 
   ngOnInit(): void {
     this.getServicesList();
+    this.setTechnicianIdValue();
   }
 
-  getRouteParamValue(): void{
+  getRouteParamValue(): void {
     this.activatedRoute.params.subscribe(params => {
       this.receivedTechnicianId = params.id;
     });
   }
 
-  getServicesList(): void{
+  getServicesList(): void {
     this.getRouteParamValue();
-    this.technicianService.getById(this.receivedTechnicianId).subscribe((data)=>{
+    this.technicianService.getById(this.receivedTechnicianId).subscribe((data) => {
       this.technician = data;
     });
   }
 
-  onSubmit(): void{
-    //this.createdReport = this.registerServiceForm.value;
-    //this.reportService.create(this.createdReport).subscribe();
-    this.registerServiceForm.get["initDateTime"].value();
-    this.registerServiceForm.get["endDateTime"].value();
+  onSubmit(): void {
+    this.createdReport = this.registerServiceForm.value;
+    this.reportService.create(this.createdReport).subscribe();
+    this.registerServiceForm.reset();
+  }
+
+  setTechnicianIdValue(): void{
+    this.registerServiceForm.controls.technicianId.setValue(this.receivedTechnicianId);
   }
 
 }

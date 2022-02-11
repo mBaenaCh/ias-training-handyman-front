@@ -28,7 +28,6 @@ export class TechnicianServicesComponent implements OnInit {
     this.getRouteParamValue();
     this.technicianService.getById(this.technicianId).subscribe((data)=>{
       this.services = data.reports;
-      console.log(this.services);
     });
   }
 
