@@ -1,7 +1,7 @@
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ReportModel } from 'src/app/shared/models/report';
 import { TechnicianModel } from 'src/app/shared/models/technician';
 import { ReportService } from 'src/app/shared/services/report.service';
@@ -19,7 +19,11 @@ export class RegisterServiceComponent implements OnInit {
   registerServiceForm: FormGroup;
   createdReport: ReportModel;
 
-  constructor(private activatedRoute: ActivatedRoute, private technicianService: TechnicianService, private reportService: ReportService) {
+  constructor(private activatedRoute: ActivatedRoute, 
+    private technicianService: TechnicianService, 
+    private reportService: ReportService,
+    private router: Router) {
+
     this.registerServiceForm = new FormGroup({
       technicianId: new FormControl('', [
         Validators.required
@@ -62,6 +66,10 @@ export class RegisterServiceComponent implements OnInit {
 
   setTechnicianIdValue(): void{
     this.registerServiceForm.controls.technicianId.setValue(this.receivedTechnicianId);
+  }
+
+  onClickReturn(): void {
+    this.router.navigate(["/technician"]);
   }
 
 }
