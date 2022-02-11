@@ -23,7 +23,8 @@ export class HoursCalculatorComponent implements OnInit {
         Validators.required
       ]),
       week: new FormControl('', [
-        Validators.required
+        Validators.required,
+        Validators.max(52)
       ]),
     });
   }

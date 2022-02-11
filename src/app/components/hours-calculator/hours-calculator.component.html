@@ -11,7 +11,7 @@
         <label>Week of the year</label>
         <input type="number" formControlName="week" class="form-control">
         <div class="error" *ngIf="hoursCalculatorForm.controls.week.errors && hoursCalculatorForm.controls.week.touched">
-            <p>This field is required</p>
+            <p>This field is required and the value can not be greater than 52</p>
         </div>
     </div>
     <input type="submit" value="Calculate" [disabled]="!hoursCalculatorForm.valid" class="btn btn-primary">
