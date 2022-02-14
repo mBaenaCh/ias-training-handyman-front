@@ -18,12 +18,17 @@ export class RegisterServiceComponent implements OnInit {
   technician: TechnicianModel;
   registerServiceForm: FormGroup;
   createdReport: ReportModel;
+  minDate: string;
+  isDatesValid: boolean;
 
-  constructor(private activatedRoute: ActivatedRoute, 
-    private technicianService: TechnicianService, 
+
+  constructor(private activatedRoute: ActivatedRoute,
+    private technicianService: TechnicianService,
     private reportService: ReportService,
     private router: Router) {
 
+    this.minDate = new Date().toISOString().split('T')[0];  //Getting the actual date to limit the minimum entry date
+    this.isDatesValid = true;
     this.registerServiceForm = new FormGroup({
       technicianId: new FormControl('', [
         Validators.required
@@ -43,6 +48,7 @@ export class RegisterServiceComponent implements OnInit {
   ngOnInit(): void {
     this.getServicesList();
     this.setTechnicianIdValue();
+    this.setMinDate(this.minDate);
   }
 
   getRouteParamValue(): void {
@@ -64,12 +70,26 @@ export class RegisterServiceComponent implements OnInit {
     this.registerServiceForm.reset();
   }
 
-  setTechnicianIdValue(): void{
+  setTechnicianIdValue(): void {
     this.registerServiceForm.controls.technicianId.setValue(this.receivedTechnicianId);
   }
 
   onClickReturn(): void {
     this.router.navigate(["/technician"]);
+  }
+
+  setMinDate(minDate: string): void {
+    this.minDate = this.minDate+"T00:00";
+  }
+
+  checkDate(): void{
+    if(this.registerServiceForm.controls.initDateTime.value <= this.registerServiceForm.controls.endDateTime.value){
+      console.log("init less than end");
+      this.isDatesValid = true;
+    }else{
+      console.log("end less than init");
+      this.isDatesValid = false
+    }
   }
 
 }
