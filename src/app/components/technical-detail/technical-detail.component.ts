@@ -47,9 +47,4 @@ export class TechnicalDetailComponent implements OnInit {
     });
   }
 
-  /* Must evaluate single responsability */
-  onReceiveEmitedService($event: ReportModel): void {
-    this.reportService.create($event).subscribe();
-    this.setServicesList();
-  }
 }

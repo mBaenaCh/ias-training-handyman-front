@@ -26,7 +26,7 @@
     </div>
     <div class="form-group">
         <label>Service end date</label>
-        <input type="datetime-local" formControlName="endDateTime" class="form-control" [min]="minDate" (change)="checkDate()">
+        <input type="datetime-local" formControlName="endDateTime" class="form-control" [min]="minDate" [max]="maxDate"(change)="checkDate()" >
         <div class="error" *ngIf="registerServiceForm.controls.endDateTime.errors && registerServiceForm.controls.endDateTime.touched">
             <p>This field is required</p>
         </div>
