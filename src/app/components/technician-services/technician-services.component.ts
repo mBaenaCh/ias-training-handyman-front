@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ServiceModel } from 'src/app/shared/models/service';
 import { TechnicianService } from 'src/app/shared/services/technician.service';
@@ -11,24 +11,11 @@ import { TechnicianService } from 'src/app/shared/services/technician.service';
 export class TechnicianServicesComponent implements OnInit {
 
   technicianId: string;
-  services: ServiceModel[];
+  @Input() services: ServiceModel[];
   constructor(private activatedRoute: ActivatedRoute, private technicianService: TechnicianService) { }
 
   ngOnInit(): void {
-    this.getServicesList();
-  }
-
-  getRouteParamValue(): void{
-    this.activatedRoute.params.subscribe(params => {
-      this.technicianId = params.id;
-    });
-  }
-
-  getServicesList(): void{
-    this.getRouteParamValue();
-    this.technicianService.getById(this.technicianId).subscribe((data)=>{
-      this.services = data.reports;
-    });
+    
   }
 
 }

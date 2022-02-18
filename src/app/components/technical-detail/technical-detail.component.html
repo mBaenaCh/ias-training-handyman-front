@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col">
-        <app-register-service></app-register-service>
+        <app-register-service (emitedService)="onReceiveEmitedService($event)"></app-register-service>
     </div>
     <div class="col">
-        <app-technician-services></app-technician-services>
+        <app-technician-services [services]="serviceList"></app-technician-services>
     </div>
 </div>

@@ -1,5 +1,4 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReportModel } from 'src/app/shared/models/report';
@@ -20,15 +19,16 @@ export class RegisterServiceComponent implements OnInit {
   createdReport: ReportModel;
   minDate: string;
   isDatesValid: boolean;
-
+  @Output() emitedReport: EventEmitter<ReportModel>;
 
   constructor(private activatedRoute: ActivatedRoute,
     private technicianService: TechnicianService,
-    private reportService: ReportService,
     private router: Router) {
 
     this.minDate = new Date().toISOString().split('T')[0];  //Getting the actual date to limit the minimum entry date
     this.isDatesValid = true;
+    this.emitedReport = new EventEmitter();
+
     this.registerServiceForm = new FormGroup({
       technicianId: new FormControl('', [
         Validators.required
@@ -64,10 +64,17 @@ export class RegisterServiceComponent implements OnInit {
     });
   }
 
+  /* Must evaluate single responsability */
   onSubmit(): void {
     this.createdReport = this.registerServiceForm.value;
-    this.reportService.create(this.createdReport).subscribe();
+
+    this.emitReport(this.createdReport);
+
     this.registerServiceForm.reset();
+  }
+
+  emitReport(content: ReportModel): void{
+    this.emitedReport.emit(content);
   }
 
   setTechnicianIdValue(): void {

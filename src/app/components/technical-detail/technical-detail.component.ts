@@ -1,5 +1,11 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ServiceModel } from 'src/app/shared/models/service';
+import { TechnicianModel } from 'src/app/shared/models/technician';
+import { ReportService } from 'src/app/shared/services/report.service';
+import { TechnicianService } from 'src/app/shared/services/technician.service';
+import { mergeMap, tap } from 'rxjs/operators';
+import { ReportModel } from 'src/app/shared/models/report';
 
 @Component({
   selector: 'app-technical-detail',
@@ -8,21 +14,42 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TechnicalDetailComponent implements OnInit {
 
-  @Output() technicianId: EventEmitter<string>;
+  technicianId: string;
+  serviceList: ServiceModel[];
 
-  constructor(private activatedRoute: ActivatedRoute) {
-    this.technicianId = new EventEmitter();
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private technicianService: TechnicianService,
+    private reportService: ReportService) {
+
+    this.technicianId = "";
+    this.serviceList = [];
   }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
-      this.technicianId.emit(params.id);
-    })
-    
+    this.getServicesList();
   }
 
-  
+  getRouteParamValue(): void{
+    this.activatedRoute.params.subscribe(params => {
+      this.technicianId = params.id;
+    });
+  }
 
+  getServicesList(): void{
+    this.getRouteParamValue();
+    this.setServicesList();
+  }
 
+  setServicesList(): void{
+    this.technicianService.getById(this.technicianId).subscribe((data) => {
+      this.serviceList = data.reports;
+    });
+  }
 
+  /* Must evaluate single responsability */
+  onReceiveEmitedService($event: ReportModel): void {
+    this.reportService.create($event).subscribe();
+    this.setServicesList();
+  }
 }

@@ -17,7 +17,7 @@
     <input type="submit" value="Calculate" [disabled]="!hoursCalculatorForm.valid" class="btn btn-primary">
     <input type="reset" value="Clear" class="btn btn-secondary">
 </form>
-<div *ngIf="showCalculatedHours">
+<div *ngIf="showCalculatedHours" class="calculatedHours">
     <h5>Total hours worked: {{calculatedHours?.totalHours}}</h5>
     <p><b>Normal hours: </b>{{calculatedHours?.normalHours}}</p>
     <p><b>Night hours: </b>{{calculatedHours?.nightHours}}</p>

@@ -23,3 +23,7 @@ input.ng-invalid.ng-touched{
 .btn-secondary{
     margin-left: 15px; 
 }
+
+.calculatedHours{
+    margin: 15px;
+}
